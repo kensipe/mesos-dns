@@ -262,6 +262,8 @@ func (res *Resolver) HandleMesos(w dns.ResponseWriter, r *dns.Msg) {
 	} else {
 		if len(m.Answer) == 0 {
 			logging.CurLog.MesosNXDomain += 1
+			logging.Error.Println("total A rrs:\t" + strconv.Itoa(len(res.rs.As)))
+			logging.Error.Println("failed looking for " + r.Question[0].String())
 		} else {
 			logging.CurLog.MesosSuccess += 1
 		}
@@ -296,6 +298,8 @@ type Resolver struct {
 
 // Reload triggers a new refresh from mesos master
 func (res *Resolver) Reload() {
-	res.rs = records.RecordGenerator{}
-	res.rs.ParseState(res.Config)
+	t := records.RecordGenerator{}
+	t.ParseState(res.Config)
+
+	res.rs = t
 }
