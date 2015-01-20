@@ -60,4 +60,4 @@ __Run__
   ```
 
 __Warnings__
-* make sure that mesos-dns is uses a port that is not blocked 
+* make sure that mesos-dns uses a port that is not blocked 
